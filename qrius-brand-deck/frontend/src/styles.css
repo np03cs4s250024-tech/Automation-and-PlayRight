@@ -1,0 +1,98 @@
+/* Qrius brand palette */
+:root {
+  --navy: #000080;
+  --indigo: #4B0082;
+  --coral: #FF7F50;
+  --blue: #005AF4;
+  --cyan: #00FBFF;
+  --ivory: #FFFBF0;
+  --lavender: #E1CFF3;
+  --sky: #B4E6FF;
+  --slate: #A3A6B7;
+  --white: #ffffff;
+  --radius: 10px;
+  --font: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--navy);
+  background: var(--ivory);
+}
+
+/* Top bar */
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
+  background: var(--white);
+  border-bottom: 2px solid var(--lavender);
+}
+.navbar img { height: 34px; }
+.navbar .spacer { flex: 1; }
+.navbar .who { color: var(--slate); font-size: 14px; }
+.navbar .role {
+  background: var(--navy); color: #fff; border-radius: 20px;
+  padding: 2px 12px; font-size: 13px; font-weight: 600; margin-left: 8px;
+}
+
+/* Login */
+.login-wrap { min-height: 100vh; display: grid; place-items: center; }
+.login-card {
+  background: var(--white); padding: 36px; border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0,0,128,.12); width: 340px;
+}
+.login-card img { height: 40px; display: block; margin: 0 auto 20px; }
+
+/* Forms */
+label { display: block; font-size: 14px; font-weight: 600; margin: 14px 0 6px; }
+input, select {
+  width: 100%; padding: 10px 12px; font-size: 15px; font-family: var(--font);
+  border: 1.5px solid var(--lavender); border-radius: var(--radius); background: #fff;
+}
+input:focus, select:focus { outline: none; border-color: var(--blue); }
+
+button {
+  font-family: var(--font); font-weight: 600; font-size: 15px; cursor: pointer;
+  border: none; border-radius: var(--radius); padding: 10px 18px;
+}
+.btn-primary { background: var(--blue); color: #fff; width: 100%; margin-top: 20px; }
+.btn-primary:hover { background: var(--navy); }
+.btn-coral { background: var(--coral); color: #fff; }
+.btn-ghost { background: transparent; color: var(--blue); padding: 6px 10px; }
+.btn-danger { background: #fff; color: #c0392b; border: 1.5px solid #e6b0a8; padding: 6px 12px; }
+
+.error {
+  color: #c0392b; background: #fdECEA; border: 1px solid #e6b0a8;
+  border-radius: var(--radius); padding: 10px 12px; margin-top: 14px; font-size: 14px;
+}
+
+/* Page layout */
+.page { max-width: 1000px; margin: 28px auto; padding: 0 24px; }
+.page h1 { margin: 0 0 4px; }
+.toolbar { display: flex; gap: 12px; align-items: center; margin: 20px 0; }
+.toolbar .search { flex: 1; max-width: 320px; }
+.toolbar .count { color: var(--slate); font-size: 14px; margin-left: auto; }
+
+/* Table */
+table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 22px rgba(0,0,128,.06); }
+th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--lavender); font-size: 14px; }
+th { background: var(--sky); font-size: 13px; text-transform: uppercase; letter-spacing: .03em; }
+tr:last-child td { border-bottom: none; }
+.status-pill { padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.s-New { background: var(--sky); }
+.s-Contacted { background: var(--lavender); }
+.s-Qualified { background: #CDEFD6; }
+.s-Lost { background: #F3D1CB; }
+.actions { display: flex; gap: 8px; }
+
+/* Modal */
+.modal-bg { position: fixed; inset: 0; background: rgba(0,0,32,.45); display: grid; place-items: center; }
+.modal { background: #fff; border-radius: 16px; padding: 28px; width: 420px; }
+.modal h2 { margin: 0 0 8px; }
+.modal .row { display: flex; gap: 12px; margin-top: 20px; }
+.modal .row button { flex: 1; }
+.empty { text-align: center; color: var(--slate); padding: 40px; }
