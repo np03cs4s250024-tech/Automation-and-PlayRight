@@ -1,40 +1,39 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../pages/LoginPage';
 
 test('login page has the correct title', async ({ page }) => {
-  await page.goto('/login');
+  const loginPage = new LoginPage(page);
+
+  await loginPage.goto();
 
   await expect(page).toHaveTitle(/Qrius Lead Manager/i);
 });
 
 test('valid admin can sign in and reach the Leads page', async ({ page }) => {
-  await page.goto('/login');
+  const loginPage = new LoginPage(page);
 
-  await page.getByTestId('username').fill('admin.qrius');
-  await page.getByTestId('password').fill('Admin@123');
-  await page.getByTestId('login-button').click();
+  await loginPage.goto();
+  await loginPage.login('admin.qrius', 'Admin@123');
 
   await expect(page).toHaveURL(/leads/i);
 });
 
 test('valid agent can sign in and see their role', async ({ page }) => {
-  await page.goto('/login');
+  const loginPage = new LoginPage(page);
 
-  await page.getByTestId('username').fill('agent.qrius');
-  await page.getByTestId('password').fill('Agent@123');
-  await page.getByTestId('login-button').click();
+  await loginPage.goto();
+  await loginPage.login('agent.qrius', 'Agent@123');
 
   await expect(page).toHaveURL(/leads/i);
-  await expect(page.getByText(/agent/i)).toBeVisible();
+  await expect(page.getByTestId('nav-role')).toHaveText(/AGENT/i);
 });
 
 test('wrong password shows an error and stays on login page', async ({ page }) => {
-  await page.goto('/login');
+  const loginPage = new LoginPage(page);
 
-  await page.getByTestId('username').fill('admin.qrius');
-  await page.getByTestId('password').fill('WrongPassword');
-  await page.getByTestId('login-button').click();
+  await loginPage.goto();
+  await loginPage.login('admin.qrius', 'WrongPassword');
 
   await expect(page).toHaveURL(/login/i);
   await expect(page.getByText(/invalid|incorrect|wrong|error/i)).toBeVisible();
 });
-
