@@ -48,4 +48,11 @@ export class LeadsPage {
 
     await this.page.getByTestId('save-button').click();
   }
+
+  // Test deleting a lead
+  async deleteLead(name: string) {
+    const lead = this.getLeadByName(name);
+
+    await lead.getByTestId('delete-button').click();
+  }
 }
