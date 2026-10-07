@@ -14,12 +14,13 @@ test.beforeEach(async ({ page }) => {
 
 test('admin can add a new lead with a chosen status', async ({ page }) => {
   const leadsPage = new LeadsPage(page);
+  const uniqueId = Date.now();
 
   const uniqueLead = {
-    name: `Roshan Add ${Date.now()}`,
-    email: `roshan.add.${Date.now()}@example.com`,
-    company: `Add Company ${Date.now()}`,
-    status: leads.newLead.status,
+    name: `Roshan Add ${uniqueId}`,
+    email: `roshan.add.${uniqueId}@example.com`,
+    company: `Add Company ${uniqueId}`,
+    status: leads.newLeadStatus,
   };
 
   await leadsPage.clickAddLead();
@@ -42,22 +43,31 @@ test('admin can add a new lead with a chosen status', async ({ page }) => {
 
 test('new lead appears with the selected status', async ({ page }) => {
   const leadsPage = new LeadsPage(page);
+  const uniqueId = Date.now();
+
+  const uniqueLead = {
+    name: `Roshan Status ${uniqueId}`,
+    email: `roshan.status.${uniqueId}@example.com`,
+    company: `Status Company ${uniqueId}`,
+    status: leads.selectedStatus,
+  };
 
   await leadsPage.clickAddLead();
 
   await leadsPage.addLead(
-    leads.statusLead.name,
-    leads.statusLead.email,
-    leads.statusLead.company,
-    leads.statusLead.status
+    uniqueLead.name,
+    uniqueLead.email,
+    uniqueLead.company,
+    uniqueLead.status
   );
 
-  const newLead = leadsPage.getLeadByName(leads.statusLead.name);
+  const newLead = leadsPage.getLeadByName(uniqueLead.name);
 
   await expect(newLead).toHaveCount(1);
-  await expect(newLead).toContainText(leads.statusLead.name);
-  await expect(newLead).toContainText(leads.statusLead.company);
-  await expect(newLead.getByTestId('lead-status')).toHaveText(
-    leads.statusLead.status
-  );
+  await expect(newLead).toContainText(uniqueLead.name);
+  await expect(newLead).toContainText(uniqueLead.company);
+
+  await expect(
+    newLead.getByTestId('lead-status')
+  ).toHaveText(uniqueLead.status);
 });

@@ -33,7 +33,7 @@ test('search by company shows matching results', async ({ page }) => {
     .getByTestId('search-input')
     .fill(leads.existingLead.company);
 
-  await expect(leadsPage.getLeadRows()).toHaveCount(1);
+  await expect(leadsPage.getLeadRows()).toHaveCount(2);
 
   await expect(leadsPage.getLeadRows().first()).toContainText(
     leads.existingLead.company

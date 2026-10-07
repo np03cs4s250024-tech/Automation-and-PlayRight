@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { LeadsPage } from '../pages/LeadsPage';
+import { leads } from '../test-data/leads';
 
 test.beforeEach(async ({ page }) => {
   const loginPage = new LoginPage(page);
@@ -11,16 +12,20 @@ test.beforeEach(async ({ page }) => {
   await expect(page).toHaveURL(/leads/i);
 });
 
-// Test editing an existing lead's status
 test('admin can edit a lead status', async ({ page }) => {
   const leadsPage = new LeadsPage(page);
 
-  const leadName = 'Anita Lama';
+  const leadName = leads.editLead.name;
 
-  await leadsPage.editLead(leadName, 'Qualified');
+  await leadsPage.editLead(
+    leadName,
+    leads.editLead.newStatus
+  );
 
   const lead = leadsPage.getLeadByName(leadName);
 
   await expect(lead).toHaveCount(1);
-  await expect(lead.getByTestId('lead-status')).toHaveText('Qualified');
+  await expect(
+    lead.getByTestId('lead-status')
+  ).toHaveText(leads.editLead.newStatus);
 });

@@ -11,13 +11,32 @@ test('admin can delete a lead', async ({ page }) => {
 
   await expect(page).toHaveURL(/leads/i);
 
-  const leadName = 'Anita Lama';
+  const uniqueId = Date.now();
 
-  await expect(leadsPage.getLeadByName(leadName)).toHaveCount(1);
+  const uniqueLead = {
+    name: `Roshan Delete ${uniqueId}`,
+    email: `roshan.delete.${uniqueId}@example.com`,
+    company: `Delete Company ${uniqueId}`,
+  };
 
-  await leadsPage.deleteLead(leadName);
+  await leadsPage.clickAddLead();
 
-  await expect(leadsPage.getLeadByName(leadName)).toHaveCount(0);
+  await leadsPage.addLead(
+    uniqueLead.name,
+    uniqueLead.email,
+    uniqueLead.company,
+    'New'
+  );
+
+  await expect(
+    leadsPage.getLeadByName(uniqueLead.name)
+  ).toHaveCount(1);
+
+  await leadsPage.deleteLead(uniqueLead.name);
+
+  await expect(
+    leadsPage.getLeadByName(uniqueLead.name)
+  ).toHaveCount(0);
 });
 
 test('agent does not see the delete button', async ({ page }) => {
@@ -29,5 +48,10 @@ test('agent does not see the delete button', async ({ page }) => {
 
   await expect(page).toHaveURL(/leads/i);
 
-  await expect(leadsPage.getLeadRows().first().getByTestId('delete-button')).toHaveCount(0);
+  await expect(
+    leadsPage
+      .getLeadRows()
+      .first()
+      .getByTestId('delete-button')
+  ).toHaveCount(0);
 });

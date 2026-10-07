@@ -4,19 +4,19 @@
 
 Judgement: my test is wrong
 
-Reason: The assignment states that the database starts with 12 leads, but the current test environment contains 24 leads and the application correctly displays all 24 records.
+Reason: The assignment states that the database starts with 12 leads, but previous test runs created additional leads in the test environment.
 
 ## Failed Test: Search by lead name narrows the list
 
 Judgement: my test is wrong
 
-Reason: The test searches for Anita Lama, but that lead was deleted during testing, so the current database contains no matching record.
+Reason: The test originally searched for Anita Lama, but that lead had already been deleted during testing, so the database contained no matching record.
 
 ## Failed Test: Search by company
 
 Judgement: the application has a bug
 
-Reason: The database contains a lead with company Ncell, but searching Ncell returns no results because the backend search query only checks the name column.
+Reason: The database contains leads with company HimalKart, but searching HimalKart returns no results because the backend search query only checks the name column.
 
 ## Failed Test: New lead appears with the selected status
 
