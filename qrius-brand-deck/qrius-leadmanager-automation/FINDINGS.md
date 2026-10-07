@@ -17,9 +17,3 @@ Reason: The database contains a lead with company Ncell, but searching Ncell ret
 Judgement: the application has a bug
 
 Reason: The lead creation form allows a selected status, but the application saves the new lead with status New instead of the selected status.
-
-## Failed Test: New lead appears with the selected status
-
-Judgement: the application has a bug
-
-Reason: The lead creation form allows a selected status, but the application saves the new lead with status New instead of the selected status.
