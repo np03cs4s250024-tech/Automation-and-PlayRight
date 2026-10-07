@@ -6,6 +6,12 @@ Judgement: my test is wrong
 
 Reason: The assignment states that the database starts with 12 leads, but the current test environment contains 24 leads and the application correctly displays all 24 records.
 
+## Failed Test: Search by lead name narrows the list
+
+Judgement: my test is wrong
+
+Reason: The test searches for Anita Lama, but that lead was deleted during testing, so the current database contains no matching record.
+
 ## Failed Test: Search by company
 
 Judgement: the application has a bug
